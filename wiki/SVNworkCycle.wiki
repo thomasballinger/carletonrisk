@@ -1,4 +1,5 @@
 Copied from the Subversion Manual
+http://svnbook.red-bean.com/en/1.0/
 
 =Basic Work Cycle=
 
