@@ -8,7 +8,7 @@ Immediate todo:
  # use better documented and more minimal game.py code currently on Tom's MSI wind
  # get Dan up and running with subversion client
 
-= Details =
+= Website Structure =
 
 || URL || functionality || HTML || code ||
 || / || welcome page - links to shit || - || none ||	
@@ -30,7 +30,7 @@ Immediate todo:
 || /newmap || -upload map images || - || - ||		
 || || -upload custom map files || - || - ||		
 || || -verify map txt files || some written || - ||
-|| /players ||-show ranking / list of players, ability to send emails to them? || - || - || /maps || -list maps, allow access to text files
+|| /players ||-show ranking / list of players, ability to send emails to them? || - || - || /maps || -list maps, allow access to text files || - || - ||
 
 static files:
 html templates for all pages				
