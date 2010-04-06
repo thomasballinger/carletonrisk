@@ -30,7 +30,8 @@ Immediate todo:
 || /newmap || -upload map images || - || - ||		
 || || -upload custom map files || - || - ||		
 || || -verify map txt files || some written || - ||
-|| /players ||-show ranking / list of players, ability to send emails to them? || - || - || /maps || -list maps, allow access to text files || - || - ||
+|| /players ||-show ranking / list of players, ability to send emails to them? || - || - ||
+|| /maps || -list maps, allow access to text files || - || - ||
 
 static files:
 html templates for all pages				
