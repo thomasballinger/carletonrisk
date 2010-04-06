@@ -1,0 +1,28 @@
+application: ballingerapp
+version: 2
+runtime: python
+api_version: 1
+
+handlers:
+- url: /games
+  script: webapprisk.py
+
+- url: /games/.*
+  script: playrisk.py
+
+- url: /favicon.ico
+  static_files: favicon.ico
+  upload: favicon.ico
+
+- url: /newgame
+  script: notfound.py
+
+- url: /players
+  script: notfound.py
+
+- url: /newmap
+  script: notfound.py
+
+- url: /.*
+  script: webapprisk.py
+
