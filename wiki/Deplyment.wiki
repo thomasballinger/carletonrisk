@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary How to make changes to the project
 #labels Phase-Deploy
 
 = Pulling down the code and deploying it =
