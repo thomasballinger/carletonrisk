@@ -26,7 +26,7 @@ Once you've made a change you like or finished the general task you intended to 
   * More information about this process is available here: http://code.google.com/p/carletonrisk/source/checkout
 
 You can test things on your computer all day, but eventually you want to change the live version.
- * If it's a big change, first change the version number in the app.yaml file.
+ * If it's a big change, and the app was working before, first change the version number in the app.yaml file.  We can roll back to the last 10 or so numbered changes, but if you don't change the number then we lose access to that most recent version.
  * appcfg.py update helloworld (then enter your google email and password)
 
-That's it!  You've just changed
+That's it!  You've just changed the live copy!  Check out http://ballingerapp.appspot.com/ to see the result
