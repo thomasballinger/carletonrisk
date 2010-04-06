@@ -1,0 +1,42 @@
+#summary Website Structure and To-do List
+
+= Introduction =
+
+Right now I'm imagining the following structure, with functionality described following the url.
+
+= Details =
+
+|| URL || functionality || HTML || code || Priority
+|| / || welcome page - links to shit || none || - ||	
+|| /games || list of games, probably organized by which you are in, admin can delete games ||rudimentary || - ||
+|| /games/GAMENAME || interface for playing game, interactively view map || - || - ||
+|| || generated javascript function for finding country clicked on || - || - ||
+|| || forms for doing moves || basic CLI || - ||
+|| || form for discussion || need to transfer over guiProg to HTML || - ||
+|| || form for sending nagging emails || - || - ||
+|| || game logic || Done || - ||
+|| || Edit player records || - || - ||
+|| || save modified game || Done || - ||	
+				
+|| /games/GAMENAME/pic || display game - just api calls for creating image || - || - ||
+|| /newgame || make new game, sanitize game name || - || - ||
+|| || check for existing game name || - || - ||
+|| || choose game map currently just uses default map || - || - ||
+|| || game map review system || - || - ||		
+|| /newmap || -upload map images || - || - ||		
+|| || -upload custom map files || - || - ||		
+|| || -verify map txt files || some written || - ||
+|| /players ||-show ranking / list of players, ability to send emails to them? || - || - ||
+				
+static files:
+html templates for all pages				
+icons for specifying colors, number to add to colors				
+css for page styling?				
+				
+				
+				
+				
+Data stored in cloud:				
+Games				
+Maps				
+Player records				
