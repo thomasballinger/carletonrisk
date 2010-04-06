@@ -6,8 +6,8 @@ Right now I'm imagining the following structure, with functionality described fo
 
 = Details =
 
-|| URL || functionality || HTML || code || Priority
-|| / || welcome page - links to shit || none || - ||	
+|| URL || functionality || HTML || code ||
+|| / || welcome page - links to shit || - || none ||	
 || /games || list of games, probably organized by which you are in, admin can delete games ||rudimentary || - ||
 || /games/GAMENAME || interface for playing game, interactively view map || - || - ||
 || || generated javascript function for finding country clicked on || - || - ||
