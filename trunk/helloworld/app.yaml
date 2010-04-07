@@ -23,6 +23,9 @@ handlers:
 - url: /newmap
   script: notfound.py
 
+- url: /js
+  static_dir: js
+
 - url: /.*
   script: webapprisk.py
 
