@@ -6,6 +6,7 @@ Right now I'm imagining the following structure, with functionality described fo
 
 Immediate todo:
  # use better documented and more minimal game.py code currently on Tom's MSI wind
+ # change game.py to correctly allow for player elimination
  # get Dan up and running with subversion client
 
 = Website Structure =
