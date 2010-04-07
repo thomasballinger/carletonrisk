@@ -12,8 +12,14 @@ class PlayRisk(webapp.RequestHandler):
     def get(self, name):
         self.response.out.write("<html> <body>")
         self.response.out.write("""
-            <script src="js.js" type="text/javascript"></script>
+            <script language="javascript" src="/js/js.js"></script>
         """)
+        #self.response.out.write("""
+        #<script type="text/javascript">
+        #var myVar = 'hello';
+        #window.alert(myVar);
+        #</script>
+        #""")
         loader = Loader(name)
         game = loader.load()
         self.response.out.write(str(game.getPlayers()))
