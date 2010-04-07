@@ -11,11 +11,14 @@ from google.appengine.ext import db
 class PlayRisk(webapp.RequestHandler):
     def get(self, name):
         self.response.out.write("<html> <body>")
+        self.response.out.write("""
+            <script src="js.js" type="text/javascript"></script>
+        """)
         loader = Loader(name)
         game = loader.load()
         self.response.out.write(str(game.getPlayers()))
         mapString = game.display()
-        mapString = mapString.replace('\n','<br>')
+        #mapString = mapString.replace('\n','<br>')
         self.response.out.write('<tt><pre>')
         self.response.out.write(mapString)
         self.response.out.write('</tt></pre><br><br><br>')

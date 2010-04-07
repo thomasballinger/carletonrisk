@@ -61,7 +61,8 @@ class Guestbook(webapp.RequestHandler):
         
 application = webapp.WSGIApplication(
                                      [('/', MainPage),
-                                      ('/sign', Guestbook)],
+                                      ('/sign', Guestbook),
+                                      ('/games', MainPage)],
                                      debug=True)
 
 def main():
