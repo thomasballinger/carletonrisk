@@ -16,12 +16,12 @@ Immediate todo:
 || /games || list of games, probably organized by which you are in, admin can delete games ||rudimentary || - ||
 || /games/GAMENAME || interface for playing game, interactively view map || - || - ||
 || || generated javascript function for finding country clicked on || - || - ||
-|| || forms for doing moves || basic CLI || - ||
-|| || form for discussion || need to transfer over guiProg to HTML || - ||
+|| || forms for doing moves || - || basic CLI ||
+|| || form for discussion || - || need to transfer over guiProg to HTML ||
 || || form for sending nagging emails || - || - ||
-|| || game logic || Done || - ||
+|| || game logic || - || Done ||
 || || Edit player records || - || - ||
-|| || save modified game || Done || - ||	
+|| || save modified game || - || Done ||	
 				
 || /games/GAMENAME/pic || display game - just api calls for creating image || - || - ||
 || /newgame || make new game, sanitize game name || - || - ||
