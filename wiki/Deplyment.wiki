@@ -11,6 +11,8 @@ All code uploaded to the Google App Engine server is contained in this source re
  * Download Google App Engine SDK
  * Check out the project using SVN
   * any decent linux distro should have SVN, the subversion version control software command line client.  You can also probably find a pretty gui client instead.
+   * Tortoise SVN for Windows works well
+   * Rapid SVN is a gui for most os's that I haven't tried
   * svn checkout https://carletonrisk.googlecode.com/svn/trunk/ whatToCallYourLocalCopy --username YourExactGoogleUserName (probably something like ThomasBallinger)
 
 Now you have a local copy of the code, and you'll never have to do those previous steps again.  To run it on a local server:
