@@ -17,7 +17,8 @@ Immediate todo:
    * help(g)
  # get map image display working
  # make javascript for getting countries closest to mouse click
- # learn ajax for later
+ # learn ajax!  jquery specifically (http://docs.jquery.com/Main_Page)
+ # learn html for overlaying a picture, more pictures, and some text (_this is how warfish does it_)
  # make html template page for playing risk
  # make maps datastore objects instead of static files
  # make map images datastore blob objects
