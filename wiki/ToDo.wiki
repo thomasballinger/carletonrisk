@@ -17,6 +17,7 @@ Immediate todo:
    * help(g)
  # get map image display working
  # make javascript for getting countries closest to mouse click
+ # learn ajax for later
  # make html template page for playing risk
  # make maps datastore objects instead of static files
  # make map images datastore blob objects
