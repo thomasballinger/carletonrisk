@@ -10,10 +10,39 @@ from google.appengine.ext import db
 
 class PlayRisk(webapp.RequestHandler):
     def get(self, name):
-        self.response.out.write("<html> <body>")
+        self.response.out.write("<html>")
         self.response.out.write("""
-            <script language="javascript" src="/js/js.js"></script>
+            <style type="text/css">
+                a.test { font-weight: bold; }
+            </style>
         """)
+        self.response.out.write("""
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+        """)
+        self.response.out.write("""
+            <script type="text/javascript">
+            $(document).ready(function(){
+                alert("Page done loading");
+                $("a").click(function(event){
+                    alert("You just clicked a link")
+                    event.preventDefault();
+                    $(this).addClass("test");
+                    $(this).hide("slow");
+                });
+            });
+            </script>
+        """)
+        self.response.out.write('<body> \n <a href="http://jquery.com/">look <br></a>')
+        self.response.out.write('<body> \n <a href="http://jquery.com/">at <br></a>')
+        self.response.out.write('<body> \n <a href="http://jquery.com/">all <br></a>')
+        self.response.out.write('<body> \n <a href="http://jquery.com/">of <br></a>')
+        self.response.out.write('<body> \n <a href="http://jquery.com/">these <br></a>')
+        self.response.out.write('<body> \n <a href="http://jquery.com/">links <br></a>')
+        self.response.out.write('<body> \n <a href="http://jquery.com/">try <br></a>')
+        self.response.out.write('<body> \n <a href="http://jquery.com/">clicking <br></a>')
+        self.response.out.write('<body> \n <a href="http://jquery.com/">them <br></a>')
+        self.response.out.write('<body> \n <a href="http://jquery.com/">they <br></a>')
+        self.response.out.write('<body> \n <a href="http://jquery.com/">disappear <br></a>')
         #self.response.out.write("""
         #<script type="text/javascript">
         #var myVar = 'hello';
