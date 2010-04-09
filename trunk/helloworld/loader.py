@@ -44,7 +44,7 @@ class Loader():
         import os
 #        raise Exception, str(os.listdir('.'))
 #        file = open(mapFile)
-        file = open("worldmap.txt")
+        file = open("maps/map4.txt")
         lines = file.readlines()
         giantString = "".join(lines)
 

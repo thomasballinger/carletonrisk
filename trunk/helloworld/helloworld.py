@@ -39,7 +39,7 @@ class MainPage(webapp.RequestHandler):
                     <div><input type="submit" value="Play current Game"></div>
                   </form>
 
-                  <img src=pics/hamlet.jpg />
+                  <img src=pics/hamlet.jpg>
                 </body>
               </html>""")
 
