@@ -25,7 +25,6 @@ class PlayRisk(webapp.RequestHandler):
         self.response.out.write("""
             <script type="text/javascript">
             $(document).ready(function(){
-                alert("Page done loading");
                 $("a").click(function(event){
                    alert("You just clicked a link")
                     event.preventDefault();
@@ -47,6 +46,7 @@ class PlayRisk(webapp.RequestHandler):
             playerColorMap[player]='/pics/'+colors[i]+'.png'
             i+=1
 
+        i=0
         for country in game.getCountries():
             cors = game.getCordinates(country)
             x = cors[0] - 10
@@ -55,8 +55,9 @@ class PlayRisk(webapp.RequestHandler):
             self.response.out.write("""\n 
                 <div style="position: absolute; left: """+str(x)+"""; top: """+str(y)+"""; z-index: 200"> 
                     <div style="position: absolute; left: 4; z-index: 400">"""+str(game.getTroops(country))+"""</div>
-                    <div style="position: absolute; z-index: 300"><img src="""+color+"""></div> 
+                    <div style="position: absolute; z-index: 300"><img src="""+color+""", id="""+str(i)"""''></div> 
                 </div>""")
+            i+=1
 
         self.response.out.write('\n </div>')
        
@@ -74,6 +75,7 @@ class PlayRisk(webapp.RequestHandler):
         #self.response.out.write(mapString)
         #self.response.out.write('</tt></pre><br><br><br>')
 
+
         user = users.get_current_user()
         if game.whosTurn == user.email():
             self.response.out.write('Your turn<br>')
@@ -89,6 +91,16 @@ class PlayRisk(webapp.RequestHandler):
             self.response.out.write('You have been elimintated from this game.<br>')
         else:
             self.response.out.write('Waiting for '+game.whosTurn+'<br>')
+        
+        if game.getTurn() != os.getWhosTurn:
+            self.response.out.write('Waiting for '+game.whosTurn+'<br>')
+        elif game.getStage() == 'reinforce':
+            pass
+        elif game.getStage() == 'attacks':
+            pass
+        elif game.getStage() == ''
+
+
         self.response.out.write('<form action="/games/'+name+'/parse" method="post">'+"""
                     <div><textarea name="content" rows="3" cols="60"></textarea></div>
                     <div><input type="submit" value="ok"></div>

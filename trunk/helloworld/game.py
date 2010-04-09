@@ -3,13 +3,16 @@ from textDisplay import Display
 # turn stages go:
 
 class Game:
+    """Represents the current state of a risk game
+ 
+    Includes full specification of the map, rules, players and current game state.  
+    Includes the NAME ONLY of the graphical map file, along with cordinates of territories on this map."""
     def __init__(self,nodeNetwork=None, players={}, bonuses=[], mapString=None, cordinates=None, mapFile=None, settingsMap={}):
         self.mapFile = mapFile
-        self.displayObj = None
         self.cordinates = cordinates
         self.rules = Rules(map=nodeNetwork,players=players)
         self.whosTurn = self.rules.players[0]
-        self.turnStage = 'reinforce'
+       self.turnStage = 'reinforce'
         self.reinforcementsToPlace = {}
         self.lastAttack = None
         self.fortifies = 1
@@ -27,26 +30,17 @@ class Game:
         self.fog = False
         if 'fog' in self.settingsMap:
             self.fog = self.settingsMap['fog']
-    
-    def giveReinforcements(self):
+        self.selectionList = []
+
+    def _giveReinforcements(self):
         if self.reinforced == True:
             return False
         else:
             self.reinforced = True
             self.reinforcementsToPlace[self.whosTurn]=self.getDeservedReinforcements(self.whosTurn)
 
-    def getInstructions(self,player):
-        if self.whosTurn != player:
-            return 'Wait for other players to take their turns'
-        else:
-            if self.turnStage == 'reinforce':
-                return 'Place your reinforcement troops'
-            elif self.turnStage == 'attacks':
-                return 'attack countries adjacent to your own'
-            elif self.turnStage == 'fortify':
-                return 'move troops from one of your countries to an adjecent country'
-
     def getFortifiesLeft(self,player):
+        """Returns 0 if not the current players turn, otherwise the number of fortifying moves left in the turn"""
         if self.whosTurn != player:
             return 0
         else:
@@ -59,23 +53,27 @@ class Game:
             return self.lastAttack
 
     def getWhosTurn(self):
+        """Returns player string of whose turn it is"""
         return self.whosTurn
     
     def getTurnStage(self):
         return self.turnStage
 
     def getReinforcements(self,player):
+        """Returns the number of reinforcements the player has yet to place"""
         return self.reinforcementsToPlace[player]
 
     def updateTurn(self):
-        if len(self.getPlayersAlive()) == 1:
-            self.turnStage = 'reinforce'
+        if self.whosTurn not in self.getPlayersAlive(): # lose condition
+            self.turnStage = 'fortify'
+            self.updateTurn()
+        if len(self.getPlayersAlive()) == 1 and self.getPlayersAlive()[0] == self.whosTurn
+            self.turnStage = 'reinforce'  # win condition
             self.reinforcementsToPlace[self.whosTurn] = 1
-        elif self.turnStage == 'reinforce':
-            if self.reinforcementsToPlace[self.whosTurn]==0:
+        elif self.turnStage == 'reinforce' and self.reinforcementsToPlace[self.whosTurn]==0:
                 self.turnStage = 'attacks'
         elif (self.turnStage == 'fortify' and self.fortifiesLeft == 0) or self.whosTurn not in self.getPlayersAlive():
-            players = self.getPlayers()
+            players = self.getPlayers()  # begin new turn
             for i in range(len(players)):
                 if self.whosTurn == players[i]:
                     self.whosTurn = players[(i+1)%len(players)]
@@ -298,6 +296,12 @@ class Game:
 
     def isOwned(self, country, player):
         return self.rules.isOwned(country, player)
+
+    def setSelection(self, list):
+        self.selectionList = list[:]
+        
+    def getSelection(self):
+        return self.selectionList[:]
 
     def allOwned(countryList, player):
         return self.rules.isOwned(country, player)
