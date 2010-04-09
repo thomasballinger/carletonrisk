@@ -10,6 +10,9 @@ from google.appengine.ext import db
 
 class PlayRisk(webapp.RequestHandler):
     def get(self, name):
+        loader = Loader(name)
+        game = loader.load()
+        
         self.response.out.write("<html>")
         self.response.out.write("""
             <style type="text/css">
@@ -32,25 +35,34 @@ class PlayRisk(webapp.RequestHandler):
             });
             </script>
         """)
-        self.response.out.write('<body> \n <a href="http://jquery.com/">look <br></a>')
-        self.response.out.write('<body> \n <a href="http://jquery.com/">at <br></a>')
-        self.response.out.write('<body> \n <a href="http://jquery.com/">all <br></a>')
-        self.response.out.write('<body> \n <a href="http://jquery.com/">of <br></a>')
-        self.response.out.write('<body> \n <a href="http://jquery.com/">these <br></a>')
-        self.response.out.write('<body> \n <a href="http://jquery.com/">links <br></a>')
-        self.response.out.write('<body> \n <a href="http://jquery.com/">try <br></a>')
-        self.response.out.write('<body> \n <a href="http://jquery.com/">clicking <br></a>')
-        self.response.out.write('<body> \n <a href="http://jquery.com/">them <br></a>')
-        self.response.out.write('<body> \n <a href="http://jquery.com/">they <br></a>')
-        self.response.out.write('<body> \n <a href="http://jquery.com/">disappear <br></a>')
+        self.response.out.write('<body> \n')
+        self.response.out.write('\n <a href="http://jquery.com/">look <br></a>')
+        self.response.out.write('\n <a href="http://jquery.com/">at <br></a>')
+        self.response.out.write('\n <a href="http://jquery.com/">all <br></a>')
+        self.response.out.write('\n <a href="http://jquery.com/">of <br></a>')
+        self.response.out.write('\n <a href="http://jquery.com/">these <br></a>')
+        self.response.out.write('\n <a href="http://jquery.com/">links <br></a>')
+        self.response.out.write('\n <a href="http://jquery.com/">try <br></a>')
+        self.response.out.write('\n <a href="http://jquery.com/">clicking <br></a>')
+        self.response.out.write('\n <a href="http://jquery.com/">them <br></a>')
+        self.response.out.write('\n <a href="http://jquery.com/">they <br></a>')
+        self.response.out.write('\n <a href="http://jquery.com/">disappear <br></a>')
+
+        self.response.out.write(repr(game.cordinates))
+
+        self.response.out.write('\n <div style="position: absolute; z-index:100"> <img src=/pics/intel.png>')
+        self.response.out.write('\n <div style="position: absolute; left: 20; top: 100; z-index:200"> <img src=/pics/orangeCircle.png> </div>')
+        self.response.out.write('\n <div style="position: absolute; left: 40; top: -10; z-index:200"> <img src=/pics/redCircle.png> </div>')
+        
+        
+        self.response.out.write('\n </div>')
+
         #self.response.out.write("""
         #<script type="text/javascript">
         #var myVar = 'hello';
         #window.alert(myVar);
         #</script>
         #""")
-        loader = Loader(name)
-        game = loader.load()
         self.response.out.write(str(game.getPlayers()))
         mapString = game.display()
         #mapString = mapString.replace('\n','<br>')

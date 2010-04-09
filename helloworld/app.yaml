@@ -26,6 +26,15 @@ handlers:
 - url: /js
   static_dir: js
 
-- url: /.*
+- url: /pics
+  static_dir: pics
+
+- url: /
   script: webapprisk.py
+
+- url: /sign
+  script: webapprisk.py
+
+#- url: /.*
+#  script: webapprisk.py
 
