@@ -1,0 +1,53 @@
+#summary Instructions for creating custom levels
+
+= Introduction =
+
+Super-customizable!  Until a decent web interface exists however, you'll have to email your maps to the project leads who will integrate them.  What we need from you is:
+ * Map file in some form
+ * Level file, as described in following section
+
+= Level File Spec =
+The format used is a plain-text and human readable.  Unlayerable tags like <start-settings> and <end-settings> designate data sections, and everything outside of those tagged sections is a comment.  The required sections are:
+ * settings
+ * nodeNetwork
+  * each line begins with a country name, then lists of countries accessible from that country
+ * mapFile
+  * unique image identifier name (just use your image filename)
+ * cordinates
+  * each line begins with a country, then lists the x and y cordinates of the location of that country on the map image, x from the left and y from the top of the image
+ * bonuses
+  * each line begins with a list of countries, then has the number of extra units awarded per turn for holding every country in that list 
+
+=Example File=
+Long list sections have been shortened a lot
+
+<start-settings>
+countriesPerTroop 5
+initialTroopsInCountries 3
+fortifies 3
+<end-settings>
+<start-nodeNetwork>
+0 137 138 139 140 1
+1 0 2
+2 1 3 7
+3 4 2 7
+4 5 3 6
+<end-nodeNetwork>
+<start-mapFile>
+/projects/schiz/ra/tomb/risk/toConvert.png
+<end-mapFile>
+<start-cordinates>
+0 700 514
+1 669 488
+2 595 487
+3 556 464
+4 535 438
+<end-cordinates>
+
+<start-bonuses>
+0 140 139 141 138 137 3
+114 115 117 116 120 118 119 4
+30 31 29 28 22 24 16 15 23 14 25 26 6
+97 98 99 100 101 103 102 104 106 105 5
+68 69 70 71 72 73 74 75 76 4
+<end-bouses>
