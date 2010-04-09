@@ -1,0 +1,27 @@
+#summary Web page for playing risk
+
+= Plan =
+
+ * load game
+ * if fortify:
+  * countries are buttons for adding a troop and reloading page
+ * if attacks:
+  * countries become highlighted if conditions are right
+   * if nothing selected:
+    * select any of your own with more than 1
+   * else:
+    * select anything not owned and touching
+  * button to cancel selection
+  * links for attacking with how many, reload, display result
+  * if captured, offer free move
+ * if reinforce:
+  * select country, select country (like attack), select how many
+ * if not your turn:
+  * cool display information
+
+= Implementation =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
