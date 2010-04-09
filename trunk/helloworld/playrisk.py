@@ -22,19 +22,19 @@ class PlayRisk(webapp.RequestHandler):
         self.response.out.write("""
             <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
         """)
-        self.response.out.write("""
-            <script type="text/javascript">
-            $(document).ready(function(){
-                alert("Page done loading");
-                $("a").click(function(event){
-                    alert("You just clicked a link")
-                    event.preventDefault();
-                    $(this).addClass("test");
-                    $(this).hide("slow");
-                });
-            });
-            </script>
-        """)
+#        self.response.out.write("""
+#            <script type="text/javascript">
+#            $(document).ready(function(){
+#                alert("Page done loading");
+#                $("a").click(function(event){
+#                    alert("You just clicked a link")
+#                    event.preventDefault();
+#                    $(this).addClass("test");
+#                    $(this).hide("slow");
+#                });
+#            });
+#            </script>
+#        """)
         self.response.out.write('<body> \n')
         self.response.out.write('\n <a href="http://jquery.com/">look <br></a>')
         self.response.out.write('\n <a href="http://jquery.com/">at <br></a>')
@@ -48,9 +48,22 @@ class PlayRisk(webapp.RequestHandler):
         self.response.out.write('\n <a href="http://jquery.com/">they <br></a>')
         self.response.out.write('\n <a href="http://jquery.com/">disappear <br></a>')
 
-        self.response.out.write(repr(game.cordinates))
+        self.response.out.write('\n <div style="position: absolute; z-index:100"> <img src=/pics/toConvertOriginal.png>')
+        
+        playerColorMap = {}
+        colors = ['blueCircle','redCircle','orangeCircle','greenCircle','pinkCircle']
+        i=0
+        for player in game.getPlayers():
+            playerColorMap[player]='/pics/'+colors[i]+'.png'
+            i+=1
 
-        self.response.out.write('\n <div style="position: absolute; z-index:100"> <img src=/pics/intel.png>')
+        for country in game.getCountries():
+            cors = game.getCordinates(country)
+            x = cors[0] - 10
+            y = cors[1] - 10
+            color = playerColorMap[game.getOwner(country)]
+            self.response.out.write('\n <div style="position: absolute; left: '+str(x)+'; top: '+str(y)+'; z-index:200"> <img src='+color+'> </div>')
+
         self.response.out.write('\n <div style="position: absolute; left: 20; top: 100; z-index:200"> <img src=/pics/orangeCircle.png> </div>')
         self.response.out.write('\n <div style="position: absolute; left: 40; top: -10; z-index:200"> <img src=/pics/redCircle.png> </div>')
         
@@ -64,11 +77,13 @@ class PlayRisk(webapp.RequestHandler):
         #</script>
         #""")
         self.response.out.write(str(game.getPlayers()))
-        mapString = game.display()
+        #mapString = game.display()
         #mapString = mapString.replace('\n','<br>')
-        self.response.out.write('<tt><pre>')
-        self.response.out.write(mapString)
-        self.response.out.write('</tt></pre><br><br><br>')
+        #self.response.out.write('<tt><pre>')
+        #self.response.out.write(mapString)
+        #self.response.out.write('</tt></pre><br><br><br>')
+        self.response.out.write('<br><br><br><br><br><br><br><br>')
+
         user = users.get_current_user()
         if game.whosTurn == user.email():
             self.response.out.write('Your turn<br>')
