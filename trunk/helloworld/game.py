@@ -12,7 +12,7 @@ class Game:
         self.cordinates = cordinates
         self.rules = Rules(map=nodeNetwork,players=players)
         self.whosTurn = self.rules.players[0]
-       self.turnStage = 'reinforce'
+        self.turnStage = 'reinforce'
         self.reinforcementsToPlace = {}
         self.lastAttack = None
         self.fortifies = 1
@@ -67,7 +67,7 @@ class Game:
         if self.whosTurn not in self.getPlayersAlive(): # lose condition
             self.turnStage = 'fortify'
             self.updateTurn()
-        if len(self.getPlayersAlive()) == 1 and self.getPlayersAlive()[0] == self.whosTurn
+        if len(self.getPlayersAlive()) == 1 and self.getPlayersAlive()[0] == self.whosTurn:
             self.turnStage = 'reinforce'  # win condition
             self.reinforcementsToPlace[self.whosTurn] = 1
         elif self.turnStage == 'reinforce' and self.reinforcementsToPlace[self.whosTurn]==0:
@@ -80,6 +80,8 @@ class Game:
                     self.reinforcementsToPlace[self.whosTurn] = self.getDeservedReinforcements(self.whosTurn)
                     self.fortifiesLeft = self.fortifies
                     self.turnStage = 'reinforce'
+                    self.selectionList = []
+                    self.lastAttack = None
                     break
 
     def getDeservedReinforcements(self,player):
@@ -310,7 +312,7 @@ class Game:
         return self.rules.board.getCountryStates()
 
     def getTurn(self):
-        return self.whosTurn()
+        return self.whosTurn
     
     def getStage(self):
         return self.turnStage()
@@ -323,11 +325,6 @@ class Game:
 
     def getMapFile(self):
         return self.mapFile
-
-    def display(self):
-        if not self.displayObj or self.displayObj==None:
-            self.displayObj = Display(self)
-        return self.displayObj.show()
         
 # debugging tools
 mymap = {'USA':['Canada','Mexico'],'Canada':['USA','Greenland'],'Mexico':['USA','Cuba','England'],'Cuba':['Mexico'],'Greenland':['Canada','Iceland'],'Iceland':['England','Greenland'],'England':['Mexico','Iceland'],'Alaska':['Canada']}
@@ -335,38 +332,30 @@ mymap = {'USA':['Canada','Mexico'],'Canada':['USA','Greenland'],'Mexico':['USA',
 if __name__=='__main__':
     
     game = Game(nodeNetwork=mymap, players=['tom', 'alex'],mapString="".join((open('worldmap.txt').readlines()[32:51])))
-    game.display()
     
     rules = game.rules
     print 'assign usa to tom',rules.assignCountry('USA','tom')
     print 'assign canada to tom',rules.assignCountry('Canada','tom')
     print 'assign mexico to alex',rules.assignCountry('Mexico','alex')
     print 'assign cuba to alex',rules.assignCountry('Cuba','alex')
-    game.display()
     print 'add units to usa',rules.addUnits('USA',3)
     print 'add unites to canada',rules.addUnits('Canada',4)
     print 'move unite from canada to usa',rules.moveUnits('Canada','USA',1)
-    game.display()
     print game.whosTurn
     print game.turnStage
     game.reinforcementsToPlace['tom']=3
     print 'reinforce usa with 3 for tom:',
     print game.reinforce('USA',3,'tom')
-    game.display()
     print 'attack mexico with 2 for tom:',
     print game.attack('USA','Mexico',2,'tom')    
-    game.display()
     print 'freemove from usa to mexico with 1 for tom:',
     print game.freeMove('USA','Mexico',1,'tom')
-    game.display()
     print 'skip:',
     print game.skip('tom')
     print 'fortify usa from canada with 1:',
     print game.fortify('Canada','USA',1,'tom')
-    game.display()
     print 'reinforce cuba once',game.reinforce('Cuba',1,'alex')
     print 'reinforce cuba twice',game.reinforce('Cuba',2,'alex')
-    game.display()
 
     print 'whosTurn',game.whosTurn
     print 'turnStage',game.turnStage

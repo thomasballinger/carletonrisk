@@ -14,15 +14,15 @@ class PlayRisk(webapp.RequestHandler):
         game = loader.load()
         
         self.response.out.write("<html>")
-        self.response.out.write("""
+        self.response.out.write('''
             <style type="text/css">
                 a.test { font-weight: bold; }
             </style>
-        """)
-        self.response.out.write("""
+        ''')
+        self.response.out.write('''
             <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
-        """)
-        self.response.out.write("""
+        ''')
+        self.response.out.write('''
             <script type="text/javascript">
             $(document).ready(function(){
                 $("a").click(function(event){
@@ -33,7 +33,7 @@ class PlayRisk(webapp.RequestHandler):
                 });
             });
             </script>
-        """)
+        ''')
         self.response.out.write('<body> \n')
         self.response.out.write('\n <a href="http://jquery.com/">this link disappears when you click it<br></a>')
 
@@ -52,22 +52,22 @@ class PlayRisk(webapp.RequestHandler):
             x = cors[0] - 10
             y = cors[1] - 10
             color = playerColorMap[game.getOwner(country)]
-            self.response.out.write("""\n 
-                <div style="position: absolute; left: """+str(x)+"""; top: """+str(y)+"""; z-index: 200"> 
-                    <div style="position: absolute; left: 4; z-index: 400">"""+str(game.getTroops(country))+"""</div>
-                    <div style="position: absolute; z-index: 300"><img src="""+color+""", id="""+str(i)"""''></div> 
-                </div>""")
+            self.response.out.write('''\n 
+                <div style="position: absolute; left: '''+str(x)+'''; top: '''+str(y)+'''; z-index: 200"> 
+                    <div style="position: absolute; left: 4; z-index: 400">'''+str(game.getTroops(country))+'''</div>
+                    <div style="position: absolute; z-index: 300"><img src="'''+color+'''"; id="'''str(i)'''"></div> 
+                </div>''')
             i+=1
 
         self.response.out.write('\n </div>')
        
         self.response.out.write('\n <div style="position:relative">')
-        #self.response.out.write("""
+        #self.response.out.write('''
         #<script type="text/javascript">
         #var myVar = 'hello';
         #window.alert(myVar);
         #</script>
-        #""")
+        #''')
         self.response.out.write(str(game.getPlayers()))
         #mapString = game.display()
         #mapString = mapString.replace('\n','<br>')
@@ -92,32 +92,22 @@ class PlayRisk(webapp.RequestHandler):
         else:
             self.response.out.write('Waiting for '+game.whosTurn+'<br>')
         
-        if game.getTurn() != os.getWhosTurn:
+        if game.getTurn() != game.getWhosTurn:
             self.response.out.write('Waiting for '+game.whosTurn+'<br>')
         elif game.getStage() == 'reinforce':
             pass
         elif game.getStage() == 'attacks':
             pass
-        elif game.getStage() == ''
+        elif game.getStage() == 'reinforce':
+            pass
 
 
-        self.response.out.write('<form action="/games/'+name+'/parse" method="post">'+"""
+        self.response.out.write('<form action="/games/'+name+'/parse" method="post">'+'''
                     <div><textarea name="content" rows="3" cols="60"></textarea></div>
                     <div><input type="submit" value="ok"></div>
                   </form>
-        <br>
-        <br>        Syntax Examples:
-        <br>        place Mexico 3
-        <br>        place 3 Mexico
-        <br>        attack USA Canada
-        <br>        attack USA Canada 3
-        <br>        free move USA Canada 8
-        <br>        move Mexico USA 2
-        <br>        move Mexico 2 USA
-        <br>        move 2 Mexico USA
-        <br>        pass
-        </div>
-       </html> </body>""")
+            </div>
+        </html> </body>''')
 
     def post(self, name):
         user = users.get_current_user()
