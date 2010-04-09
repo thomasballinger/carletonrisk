@@ -1,11 +1,7 @@
 #summary Website Structure and To-do List
 
 = Introduction =
-
-Right now I'm imagining the following structure, with functionality described following the url.
-
 Immediate todo:
- # change game.py to correctly allow for player elimination
  # get Dan up and running with subversion client and give Dan something to do
   * static HTML
   * HTML templates
@@ -15,15 +11,14 @@ Immediate todo:
    * import loader
    * g = loader.load()
    * help(g)
- # get map image display working
- # make javascript for getting countries closest to mouse click
+ # PlayRiskPage shoudl be fixed
  # learn ajax!  jquery specifically (http://docs.jquery.com/Main_Page)
- # learn html for overlaying a picture, more pictures, and some text (_this is how warfish does it_)
  # make html template page for playing risk
  # make maps datastore objects instead of static files
  # make map images datastore blob objects
 
 = Website Structure =
+Right now I'm imagining the following structure, with functionality described following the url.
 
 || URL || functionality || HTML || code ||
 || / || welcome page - links to shit || - || none ||	
@@ -48,8 +43,7 @@ Immediate todo:
 || /players ||-show ranking / list of players, ability to send emails to them? || - || - ||
 || /maps || -list maps, allow access to text files || - || - ||
 
-static files:
-html templates for all pages				
+static files:			
 icons for specifying colors, number to add to colors				
 css for page styling?				
 				
