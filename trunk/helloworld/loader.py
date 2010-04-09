@@ -127,7 +127,7 @@ class Loader():
                 if toAdd > 0:
                     rules.addUnits(country,toAdd)
             i+=1
-        g.giveReinforcements()
+        g._giveReinforcements()
         
         self.longString = LongString()
         string = pickle.dumps(g)

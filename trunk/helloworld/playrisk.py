@@ -55,7 +55,7 @@ class PlayRisk(webapp.RequestHandler):
             self.response.out.write('''\n 
                 <div style="position: absolute; left: '''+str(x)+'''; top: '''+str(y)+'''; z-index: 200"> 
                     <div style="position: absolute; left: 4; z-index: 400">'''+str(game.getTroops(country))+'''</div>
-                    <div style="position: absolute; z-index: 300"><img src="'''+color+'''"; id="'''str(i)'''"></div> 
+                    <div style="position: absolute; z-index: 300"><img src="'''+color+'''"; id="'''+str(i)+'''"></div> 
                 </div>''')
             i+=1
 
