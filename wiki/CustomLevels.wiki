@@ -21,6 +21,7 @@ The format used is a plain-text and human readable.  Unlayerable tags like <star
 =Example File=
 Long list sections have been shortened a lot
 
+{{{
 <start-settings>
 countriesPerTroop 5
 initialTroopsInCountries 3
@@ -51,3 +52,4 @@ fortifies 3
 97 98 99 100 101 103 102 104 106 105 5
 68 69 70 71 72 73 74 75 76 4
 <end-bouses>
+}}}
