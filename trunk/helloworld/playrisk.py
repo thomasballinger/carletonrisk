@@ -22,31 +22,21 @@ class PlayRisk(webapp.RequestHandler):
         self.response.out.write("""
             <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
         """)
-#        self.response.out.write("""
-#            <script type="text/javascript">
-#            $(document).ready(function(){
-#                alert("Page done loading");
-#                $("a").click(function(event){
-#                    alert("You just clicked a link")
-#                    event.preventDefault();
-#                    $(this).addClass("test");
-#                    $(this).hide("slow");
-#                });
-#            });
-#            </script>
-#        """)
+        self.response.out.write("""
+            <script type="text/javascript">
+            $(document).ready(function(){
+                alert("Page done loading");
+                $("a").click(function(event){
+                   alert("You just clicked a link")
+                    event.preventDefault();
+                    $(this).addClass("test");
+                    $(this).hide("slow");
+                });
+            });
+            </script>
+        """)
         self.response.out.write('<body> \n')
-        self.response.out.write('\n <a href="http://jquery.com/">look <br></a>')
-        self.response.out.write('\n <a href="http://jquery.com/">at <br></a>')
-        self.response.out.write('\n <a href="http://jquery.com/">all <br></a>')
-        self.response.out.write('\n <a href="http://jquery.com/">of <br></a>')
-        self.response.out.write('\n <a href="http://jquery.com/">these <br></a>')
-        self.response.out.write('\n <a href="http://jquery.com/">links <br></a>')
-        self.response.out.write('\n <a href="http://jquery.com/">try <br></a>')
-        self.response.out.write('\n <a href="http://jquery.com/">clicking <br></a>')
-        self.response.out.write('\n <a href="http://jquery.com/">them <br></a>')
-        self.response.out.write('\n <a href="http://jquery.com/">they <br></a>')
-        self.response.out.write('\n <a href="http://jquery.com/">disappear <br></a>')
+        self.response.out.write('\n <a href="http://jquery.com/">this link disappears when you click it<br></a>')
 
         self.response.out.write('\n <div style="position: absolute; z-index:100"> <img src=/pics/toConvertOriginal.png>')
         
