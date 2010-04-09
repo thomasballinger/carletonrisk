@@ -38,7 +38,7 @@ class PlayRisk(webapp.RequestHandler):
         self.response.out.write('<body> \n')
         self.response.out.write('\n <a href="http://jquery.com/">this link disappears when you click it<br></a>')
 
-        self.response.out.write('\n <div style="position: absolute; z-index:100"> <img src=/pics/toConvertOriginal.png>')
+        self.response.out.write('\n <div style="position: relative; z-index:100"> <img src=/pics/toConvertOriginal.png>')
         
         playerColorMap = {}
         colors = ['blueCircle','redCircle','orangeCircle','greenCircle','pinkCircle']
@@ -52,14 +52,15 @@ class PlayRisk(webapp.RequestHandler):
             x = cors[0] - 10
             y = cors[1] - 10
             color = playerColorMap[game.getOwner(country)]
-            self.response.out.write('\n <div style="position: absolute; left: '+str(x)+'; top: '+str(y)+'; z-index:200"> <img src='+color+'> </div>')
+            self.response.out.write("""\n 
+                <div style="position: absolute; left: """+str(x)+"""; top: """+str(y)+"""; z-index: 200"> 
+                    <div style="position: absolute; left: 4; z-index: 400">"""+str(game.getTroops(country))+"""</div>
+                    <div style="position: absolute; z-index: 300"><img src="""+color+"""></div> 
+                </div>""")
 
-        self.response.out.write('\n <div style="position: absolute; left: 20; top: 100; z-index:200"> <img src=/pics/orangeCircle.png> </div>')
-        self.response.out.write('\n <div style="position: absolute; left: 40; top: -10; z-index:200"> <img src=/pics/redCircle.png> </div>')
-        
-        
         self.response.out.write('\n </div>')
-
+       
+        self.response.out.write('\n <div style="position:relative">')
         #self.response.out.write("""
         #<script type="text/javascript">
         #var myVar = 'hello';
@@ -72,7 +73,6 @@ class PlayRisk(webapp.RequestHandler):
         #self.response.out.write('<tt><pre>')
         #self.response.out.write(mapString)
         #self.response.out.write('</tt></pre><br><br><br>')
-        self.response.out.write('<br><br><br><br><br><br><br><br>')
 
         user = users.get_current_user()
         if game.whosTurn == user.email():
@@ -89,7 +89,7 @@ class PlayRisk(webapp.RequestHandler):
             self.response.out.write('You have been elimintated from this game.<br>')
         else:
             self.response.out.write('Waiting for '+game.whosTurn+'<br>')
-        self.response.out.write('<form action="/games/'+name+'/parse" method="post"'+"""
+        self.response.out.write('<form action="/games/'+name+'/parse" method="post">'+"""
                     <div><textarea name="content" rows="3" cols="60"></textarea></div>
                     <div><input type="submit" value="ok"></div>
                   </form>
@@ -104,6 +104,7 @@ class PlayRisk(webapp.RequestHandler):
         <br>        move Mexico 2 USA
         <br>        move 2 Mexico USA
         <br>        pass
+        </div>
        </html> </body>""")
 
     def post(self, name):
