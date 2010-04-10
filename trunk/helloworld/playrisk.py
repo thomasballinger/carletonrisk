@@ -10,6 +10,8 @@ from google.appengine.ext import db
 
 class PlayRisk(webapp.RequestHandler):
     def get(self, name):
+        user = users.get_current_user()
+        email = user.email()
         loader = Loader(name)
         game = loader.load()
         
@@ -26,8 +28,6 @@ class PlayRisk(webapp.RequestHandler):
             <script type="text/javascript">
             $(document).ready(function(){
                 $("a").click(function(event){
-                   alert("You just clicked a link")
-                    event.preventDefault();
                     $(this).addClass("test");
                     $(this).hide("slow");
                 });
@@ -35,7 +35,7 @@ class PlayRisk(webapp.RequestHandler):
             </script>
         ''')
         self.response.out.write('<body> \n')
-        self.response.out.write('\n <a href="http://jquery.com/">this link disappears when you click it<br></a>')
+        self.response.out.write('\n <a href="http://jquery.com/">The name of this game is '+name+'<br></a>')
 
         self.response.out.write('\n <div style="position: relative; z-index:100"> <img src=/pics/toConvertOriginal.png>')
         
@@ -46,6 +46,15 @@ class PlayRisk(webapp.RequestHandler):
             playerColorMap[player]='/pics/'+colors[i]+'.png'
             i+=1
 
+        if game.getTurn() != game.getWhosTurn:
+            link = '/games/'+name
+        elif game.getStage() == 'reinforce':
+            line = '/games/'+name+'/reinforce'
+        elif game.getStage() == 'attacks':
+            link = '/games/'+name+'/attack'
+        elif game.getStage() == 'fortify':
+            link = '/games/'+name+'/fortify'
+
         i=0
         for country in game.getCountries():
             cors = game.getCordinates(country)
@@ -53,9 +62,11 @@ class PlayRisk(webapp.RequestHandler):
             y = cors[1] - 10
             color = playerColorMap[game.getOwner(country)]
             self.response.out.write('''\n 
-                <div style="position: absolute; left: '''+str(x)+'''; top: '''+str(y)+'''; z-index: 200"> 
+                <div style="position: absolute; left: '''+str(x)+'''; top: '''+str(y)+'''; z-index: 200" title="name: '''+country+'''"> 
+                    <a href="'''+link+'''">
                     <div style="position: absolute; left: 4; z-index: 400">'''+str(game.getTroops(country))+'''</div>
                     <div style="position: absolute; z-index: 300"><img src="'''+color+'''"; id="'''+str(i)+'''"></div> 
+                    </a>
                 </div>''')
             i+=1
 
@@ -76,30 +87,21 @@ class PlayRisk(webapp.RequestHandler):
         #self.response.out.write('</tt></pre><br><br><br>')
 
 
-        user = users.get_current_user()
-        if game.whosTurn == user.email():
+        if game.whosTurn == email:
             self.response.out.write('Your turn<br>')
             if game.turnStage == 'reinforce':
-                self.response.out.write('Place reinforcements: '+str(game.reinforcementsToPlace[user.email()])+' left to place<br>')
+                self.response.out.write('Place reinforcements: '+str(game.reinforcementsToPlace[email])+' left to place<br>')
             elif game.turnStage == 'attacks':
                 self.response.out.write('Attack adjacent territories')
             elif game.turnStage == 'fortify':
                 self.response.out.write('Move troops: '+str(game.fortifiesLeft)+' fortifying moves left')
-        elif not user.email() in game.getPlayers():
+        elif not email in game.getPlayers():
             self.response.out.write('You are not a participant of this game.<br>')
-        elif not user.email() in game.getPlayersAlive():
+        elif not email in game.getPlayersAlive():
             self.response.out.write('You have been elimintated from this game.<br>')
         else:
             self.response.out.write('Waiting for '+game.whosTurn+'<br>')
         
-        if game.getTurn() != game.getWhosTurn:
-            self.response.out.write('Waiting for '+game.whosTurn+'<br>')
-        elif game.getStage() == 'reinforce':
-            pass
-        elif game.getStage() == 'attacks':
-            pass
-        elif game.getStage() == 'reinforce':
-            pass
 
 
         self.response.out.write('<form action="/games/'+name+'/parse" method="post">'+'''
@@ -110,7 +112,6 @@ class PlayRisk(webapp.RequestHandler):
         </html> </body>''')
 
     def post(self, name):
-        user = users.get_current_user()
         text = cgi.escape(self.request.get('content'))
         loader = Loader(name)
         game = loader.load()
@@ -118,8 +119,86 @@ class PlayRisk(webapp.RequestHandler):
         if result:
             loader.save(game)
         self.redirect('/games/'+name)
+
+class Reinforce(webapp.RequestHandler):
+    def get(self, name, country, howMany):
+        user = users.get_current_user()
+        loader = Loader(name)
+        game = loader.load()
+        result = game.reinforce(country,int(howMany),user.email())
+        if result:
+            loader.save(game)
+            self.redirect('/games/'+name)
+        else:
+            self.response.out.write("<html><body>")
+            self.response.out.write('Problem processing order')
+            self.response.out.write('</body></html>')
+
+class Attack(webapp.RequestHandler):
+    def get(self, name, fromCountry, toCountry, howMany):
+        user = users.get_current_user()
+        loader = Loader(name)
+        game = loader.load()
+        result = game.attack(fromCountry,toCountry,int(howMany),user.email())
+        if result:
+            loader.save(game)
+            self.redirect('/games/'+name)
+        else:
+            self.response.out.write("<html><body>")
+            self.response.out.write('Problem processing order')
+            self.response.out.write('</body></html>')
                         
-application = webapp.WSGIApplication([('/games/(.*)/parse', PlayRisk),('/games/(.*)', PlayRisk)], debug=True)
+class Freemove(webapp.RequestHandler):
+    def get(self, name, fromCountry, toCountry, howMany):
+        user = users.get_current_user()
+        loader = Loader(name)
+        game = loader.load()
+        result = game.freeMove(fromCountry,toCountry,int(howMany),user.email())
+        if result:
+            loader.save(game)
+            self.redirect('/games/'+name)
+        else:
+            self.response.out.write("<html><body>")
+            self.response.out.write('Problem processing order')
+            self.response.out.write('</body></html>')
+                        
+class Fortify(webapp.RequestHandler):
+    def get(self, name, fromCountry, toCountry, howMany):
+        user = users.get_current_user()
+        loader = Loader(name)
+        game = loader.load()
+        result = game.fortify(fromCountry,toCountry,int(howMany),user.email())
+        if result:
+            loader.save(game)
+            self.redirect('/games/'+name)
+        else:
+            self.response.out.write("<html><body>")
+            self.response.out.write('Problem processing order')
+            self.response.out.write('</body></html>')
+
+class Skip(webapp.RequestHandler):
+    def get(self, name):
+        user = users.get_current_user()
+        loader = Loader(name)
+        game = loader.load()
+        result = game.skip(user.email())
+        if result:
+            loader.save(game)
+            self.redirect('/games/'+name)
+        else:
+            self.response.out.write("<html><body>")
+            self.response.out.write('Problem processing order')
+            self.response.out.write('</body></html>')
+
+application = webapp.WSGIApplication([
+('/games/(.*)/parse', PlayRisk),
+('/games/(.*)/reinforce/(.*)/(.*)', Reinforce),
+('/games/(.*)/attack/(.*)/(.*)/(.*)', Attack),
+('/games/(.*)/freemove/(.*)/(.*)/(.*)', Freemove),
+('/games/(.*)/fortify/(.*)/(.*)/(.*)', Fortify),
+('/games/(.*)/skip', Skip),
+('/games/(.*)', PlayRisk),
+], debug=True)
 def main():
     run_wsgi_app(application)
 if __name__=='__main__':

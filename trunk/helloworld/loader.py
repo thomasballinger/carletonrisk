@@ -106,7 +106,7 @@ class Loader():
                 mapLines.append(line)
                 continue
             else:
-                raise Exception, 'I do not know what to do with this line of text'
+                raise Exception, 'I do not know what to do with this line of text: '+line
                 
         mapString = "".join(mapLines)
         shuffle(playerList)
