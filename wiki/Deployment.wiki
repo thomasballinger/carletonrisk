@@ -1,0 +1,33 @@
+#summary How to make changes to the project
+
+= Pulling down the code and deploying it =
+The live version of this software is at http://ballingerapp.appspot.com/
+The control panel for it is at http://appengine.google.com/dashboard?&app_id=ballingerapp
+
+All code uploaded to the Google App Engine server is contained in this source repository.  To pull down the code the first time for local execution, you need to follow the steps below:
+
+ * Download python 2.5 (preferably, although 2.6 will work for this project)
+ * Download Google App Engine SDK
+ * Check out the project using SVN
+  * any decent linux distro should have SVN, the subversion version control software command line client.  You can also probably find a pretty gui client instead.
+   * Tortoise SVN for Windows works well
+   * Rapid SVN is a gui for most os's that I haven't tried
+  * svn checkout https://carletonrisk.googlecode.com/svn/trunk/ whatToCallYourLocalCopy --username YourExactGoogleUserName (probably something like ThomasBallinger)
+
+Now you have a local copy of the code, and you'll never have to do those previous steps again.  To run it on a local server:
+ * dev_appserver.py helloworld (that's the name of the folder that is the root of the portion of the project that we upload - it has to be in your current directory)
+ * Direct a web browser to http://localhost:8080/
+
+To update you local copy in case something has changed (you should always do this before you start working on something):
+ * svn update (while at the top level of the directory) or svn update whatYouCalledYourLocalCopy (from the directory above it)
+
+Once you've made a change you like or finished the general task you intended to do, you should propgate your changes to the repository so everyone can see and use them.
+ * svn commit file (file can be just the one you changed, or just whatYouCalledYourLocalCopy, and only things you changed will be updated)
+  * You'll have to type your Google email, your password, and (only the first time on a given computer) your special google code password available here: https://code.google.com/hosting/settings
+  * More information about this process is available here: http://code.google.com/p/carletonrisk/source/checkout
+
+You can test things on your computer all day, but eventually you want to change the live version.
+ * If it's a big change, and the app was working before, first change the version number in the app.yaml file.  We can roll back to the last 10 or so numbered changes, but if you don't change the number then we lose access to that most recent version.
+ * appcfg.py update helloworld (then enter your google email and password)
+
+That's it!  You've just changed the live copy!  Check out http://ballingerapp.appspot.com/ to see the result
