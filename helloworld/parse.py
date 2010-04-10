@@ -11,11 +11,14 @@ def parseInput(input, game):
         if len(words) == 2:
             result = game.reinforce(words[1], 1, user.email())
         elif len(words) == 3:
-            howMany = 1
+            howMany = None
             country = None
             for word in words:
                 try:
-                    howMany = int(word)
+                    if not howMany:
+                        howMany = int(word)
+                    else:
+                        country = word
                 except:
                     country = word
             if not howMany or not country:
