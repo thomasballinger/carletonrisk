@@ -62,14 +62,11 @@ class PlayRisk(webapp.RequestHandler):
             fromCountry = game.getSelection()[0]
             toCountry = game.getSelection()[1]
             if game.lastAttack and game.lastAttack['captured']:
-                if game.getTroops(fromCountry)>1:
+                if game.getTroops(fromCountry)>1 and not game.justMadeFreeMove:
                     self.response.out.write('\nMove how many additional troops?')
                     for i in range(0,game.getTroops(fromCountry),1):
                         self.response.out.write('\n <a href="/games/'+name+'/freemove/'+fromCountry+'/'+toCountry+'/'+str(i)+'">'+str(i)+'</a>')
                     self.response.out.write('<br>')
-                else:
-                    game.clearSelection()
-            
             else:
                 if game.getTroops(fromCountry)>=2:
                     self.response.out.write('\n <a href="/games/'+name+'/attack/'+fromCountry+'/'+toCountry+'/1">Attack with 1<br></a>')
@@ -79,16 +76,6 @@ class PlayRisk(webapp.RequestHandler):
                     self.response.out.write('\n <a href="/games/'+name+'/attack/'+fromCountry+'/'+toCountry+'/3">Attack with 3<br></a>')
                 self.response.out.write('\n <a href="/games/'+name+'/select">cancel<br></a>')
             self.response.out.write('\n <a href="/games/'+name+'/skip">done attacking<br></a>')
-        
-            if game.getLastAttack(email) and game.showAttackResult:
-                self.response.out.write('''<br>Attack Results:''')
-                if game.lastAttack['captured']:
-                    self.response.out.write('''<br>Territory Captured!''')
-                self.response.out.write('''
-                <br>Attacking Rolls: '''+repr(game.lastAttack['attack'])+'''
-                <br>Defending Rolls: '''+repr(game.lastAttack['defense'])+'''
-                <br>Attacking Troops Lost: '''+str(game.lastAttack['attackersKilled'])+'''
-                <br>Defending Troops Lost: '''+str(game.lastAttack['defendersKilled'])+'''<br>''')
         
         elif game.getStage() == 'attacks' and len(game.getSelection()) == 1:
             self.response.out.write('\n <a href="/games/'+name+'/select">cancel<br></a>')
@@ -110,6 +97,17 @@ class PlayRisk(webapp.RequestHandler):
             for i in range(1,game.getTroops(fromCountry),1):
                 self.response.out.write('\n <a href="/games/'+name+'/fortify/'+fromCountry+'/'+toCountry+'/'+str(i)+'">'+str(i)+'</a>')
             self.response.out.write('<br>\n <a href="/games/'+name+'/select">cancel<br></a>')
+        
+        if game.getLastAttack(email) and game.showAttackResult:
+            self.response.out.write('''<br>Attack Results:''')
+            if game.lastAttack['captured']:
+                self.response.out.write('''<br>Territory Captured!''')
+            self.response.out.write('''
+            <br>Attacking Rolls: '''+repr(game.lastAttack['attack'])+'''
+            <br>Defending Rolls: '''+repr(game.lastAttack['defense'])+'''
+            <br>Attacking Troops Lost: '''+str(game.lastAttack['attackersKilled'])+'''
+            <br>Defending Troops Lost: '''+str(game.lastAttack['defendersKilled'])+'''<br>''')
+        
 
         self.response.out.write('\n <div style="position: relative; z-index:100"> <img src=/pics/toConvertOriginal.png>')
         self.response.out.write('\n <font color="FFFFFF">')
@@ -220,6 +218,7 @@ class UpdateSelection(webapp.RequestHandler):
                 if not game.isCountry(word):
                     raise Exception, "entry "+word+" is not a country"
             game.setSelection(words)
+        game.showAttackResult = False
         loader.save(game)
         self.redirect('/games/'+name)
 
@@ -231,11 +230,7 @@ class Reinforce(webapp.RequestHandler):
         result = game.reinforce(country,int(howMany),user.email())
         if result:
             loader.save(game)
-            self.redirect('/games/'+name)
-        else:
-            self.response.out.write("<html><body>")
-            self.response.out.write('Problem processing order')
-            self.response.out.write('</body></html>')
+        self.redirect('/games/'+name)
 
 class Attack(webapp.RequestHandler):
     def get(self, name, fromCountry, toCountry, howMany):
@@ -245,6 +240,8 @@ class Attack(webapp.RequestHandler):
         result = game.attack(fromCountry,toCountry,int(howMany),user.email())
         if result:
             loader.save(game)
+            if game.getTroops(fromCountry)<2:
+                game.clearSelection()
             self.redirect('/games/'+name)
         else:
             self.response.out.write("<html><body>")
@@ -256,6 +253,7 @@ class Freemove(webapp.RequestHandler):
         user = users.get_current_user()
         loader = Loader(name)
         game = loader.load()
+        
         result = game.freeMove(fromCountry,toCountry,int(howMany),user.email())
         if result:
             loader.save(game)

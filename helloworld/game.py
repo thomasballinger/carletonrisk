@@ -212,6 +212,7 @@ class Game:
             self.justMadeFreeMove = True
             return True
         else:
+            raise Exception, 'rules failed'
             return False
 
     def fortify(self,fromCountry,toCountry,howMany,player):
