@@ -32,7 +32,7 @@ class MainPage(webapp.RequestHandler):
 #            longstring.delete()
 
 def cleanString(string):
-    for c,r in ((' ','_'),("'",''),('"',''),('/','_over_'),('\\','_slash_')):
+    for c,r in ((' ','_'),("'",''),('"',''),('/','_over_'),('\\','_slash_'),('?',''),('*','_')):
         while True:
             index = string.find(c)
             if index == -1:

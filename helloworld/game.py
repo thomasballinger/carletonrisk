@@ -31,6 +31,8 @@ class Game:
         if 'fog' in self.settingsMap:
             self.fog = self.settingsMap['fog']
         self.selectionList = []
+        self.showAttackResult = False
+        self.justMadeFreeMove = False
 
     def _giveReinforcements(self):
         if self.reinforced == True:
@@ -82,6 +84,7 @@ class Game:
                     self.turnStage = 'reinforce'
                     self.selectionList = []
                     self.lastAttack = None
+                    self.justMadeFreeMove = False
                     break
 
     def getDeservedReinforcements(self,player):
@@ -170,6 +173,8 @@ class Game:
             self.lastAttack = output
             # FINISH PROCESSING ATTACK!  ? is there anythin left to do?
             self.updateTurn()
+            self.showAttackResult = True
+            self.justMadeFreeMove = False
             return output
 
     def freeMove(self,fromCountry,toCountry,howMany,player):
@@ -203,6 +208,8 @@ class Game:
             return False
         if self.rules.moveUnits(fromCountry, toCountry, howMany):
             self.updateTurn()
+            self.showAttackResult = False
+            self.justMadeFreeMove = True
             return True
         else:
             return False
@@ -249,6 +256,7 @@ class Game:
                     return False
             elif self.turnStage == 'attacks':
                 self.turnStage = 'fortify'
+                self.showAttackResult = False
                 self.updateTurn()
                 return True
             elif self.turnStage == 'fortify':
@@ -305,6 +313,9 @@ class Game:
     def getSelection(self):
         return self.selectionList[:]
 
+    def clearSelection(self):
+        self.selectionList = []
+
     def allOwned(countryList, player):
         return self.rules.isOwned(country, player)
 
@@ -315,7 +326,7 @@ class Game:
         return self.whosTurn
     
     def getStage(self):
-        return self.turnStage()
+        return self.turnStage
 
     def getMapString(self):
         return self.mapString
