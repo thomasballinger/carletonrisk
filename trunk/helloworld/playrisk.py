@@ -40,6 +40,7 @@ class PlayRisk(webapp.RequestHandler):
 
         # Instructions, information about the game
         self.response.out.write('\n <a href="http://jquery.com/">The name of this game is '+name+'<br></a>')
+        self.response.out.write('\n <a href="http://code.google.com/p/carletonrisk/issues/entry">Report Bug or Request Feature <br></a>')
         if game.whosTurn == email:
             self.response.out.write('Your turn<br>')
             if game.turnStage == 'reinforce':
@@ -239,9 +240,9 @@ class Attack(webapp.RequestHandler):
         game = loader.load()
         result = game.attack(fromCountry,toCountry,int(howMany),user.email())
         if result:
-            loader.save(game)
             if game.getTroops(fromCountry)<2:
                 game.clearSelection()
+            loader.save(game)
             self.redirect('/games/'+name)
         else:
             self.response.out.write("<html><body>")
