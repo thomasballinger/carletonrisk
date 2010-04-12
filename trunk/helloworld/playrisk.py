@@ -39,7 +39,7 @@ class PlayRisk(webapp.RequestHandler):
         self.response.out.write('<body> \n')
 
         # Instructions, information about the game
-        self.response.out.write('\n <a href="http://jquery.com/">The name of this game is '+name+'<br></a>')
+        self.response.out.write('\n '+name+'<br>')
         self.response.out.write('\n <a href="http://code.google.com/p/carletonrisk/issues/entry">Report Bug or Request Feature <br></a>')
         if game.whosTurn == email:
             self.response.out.write('Your turn<br>')
@@ -62,8 +62,8 @@ class PlayRisk(webapp.RequestHandler):
         elif game.getStage() == 'attacks' and len(game.getSelection()) == 2:
             fromCountry = game.getSelection()[0]
             toCountry = game.getSelection()[1]
-            if game.lastAttack and game.lastAttack['captured']:
-                if game.getTroops(fromCountry)>1 and not game.justMadeFreeMove:
+            if game.lastAttack and game.lastAttack['captured'] and not game.justMadeFreeMove:
+                if game.getTroops(fromCountry)>1:
                     self.response.out.write('\nMove how many additional troops?')
                     for i in range(0,game.getTroops(fromCountry),1):
                         self.response.out.write('\n <a href="/games/'+name+'/freemove/'+fromCountry+'/'+toCountry+'/'+str(i)+'">'+str(i)+'</a>')
@@ -87,6 +87,9 @@ class PlayRisk(webapp.RequestHandler):
  
         elif game.getStage() == 'reinforce':
             self.response.out.write('\n Click a country to place a troop there')
+
+        elif game.getStage() == 'fortify' and len(game.getSelection()) == 0:
+            self.response.out.write('\n <a href="/games/'+name+'/skip">done fortifying<br></a>')
 
         elif game.getStage() == 'fortify' and len(game.getSelection()) == 1:
             self.response.out.write('\n <a href="/games/'+name+'/select">cancel<br></a>')
@@ -242,6 +245,7 @@ class Attack(webapp.RequestHandler):
         if result:
             if game.getTroops(fromCountry)<2:
                 game.clearSelection()
+                game.justMadeFreeMove = True
             loader.save(game)
             self.redirect('/games/'+name)
         else:
@@ -257,6 +261,7 @@ class Freemove(webapp.RequestHandler):
         
         result = game.freeMove(fromCountry,toCountry,int(howMany),user.email())
         if result:
+            game.clearSelection()
             loader.save(game)
             self.redirect('/games/'+name)
         else:
@@ -286,6 +291,7 @@ class Skip(webapp.RequestHandler):
         game = loader.load()
         result = game.skip(user.email())
         if result:
+            game.clearSelection()
             loader.save(game)
             self.redirect('/games/'+name)
         else:
