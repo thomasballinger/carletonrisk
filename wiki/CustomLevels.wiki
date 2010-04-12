@@ -32,16 +32,16 @@ fortifies 3
 <end-settings>
 
 <start-nodeNetwork>
-USA Canada Mexico Cuba
-Canada USA
-Mexico Cuba USA
-Cuba Mexico USA
+Usa Canada Mexico Cuba
+Canada Usa
+Mexico Cuba Usa
+Cuba Mexico Usa
 <end-nodeNetwork>
 <start-mapFile>
 mapName.png
 <end-mapFile>
 <start-cordinates>
-USA 200 200
+Usa 200 200
 Canada 200 100
 Mexico 200 300
 Cuba 300 300 
