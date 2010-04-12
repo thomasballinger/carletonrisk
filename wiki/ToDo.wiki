@@ -2,23 +2,18 @@
 
 = Introduction =
 Immediate todo:
- # get Dan up and running with subversion client and give Dan something to do
-  * static HTML
-  * HTML templates
-  * game.py game objects
-   * start python interpreter
-   * from game import Game
-   * import loader
-   * g = loader.load()
-   * help(g)
- # PlayRiskPage shoudl be fixed
- # learn ajax!  jquery specifically (http://docs.jquery.com/Main_Page)
+ # Win Condition
+ # method for inviting non-developer players
+ # Cards!
+ # method for uploading and checking custom games
  # make html template page for playing risk
  # make maps datastore objects instead of static files
  # make map images datastore blob objects
 
 = Website Structure =
 Right now I'm imagining the following structure, with functionality described following the url.
+
+OUTDATED now - maybe.
 
 || URL || functionality || HTML || code ||
 || / || welcome page - links to shit || - || none ||	
@@ -46,6 +41,17 @@ Right now I'm imagining the following structure, with functionality described fo
 static files:			
 icons for specifying colors, number to add to colors				
 css for page styling?				
+
+Things to do with Dan
+ # get Dan up and running with subversion client
+  * static HTML
+  * HTML templates
+  * game.py game objects
+   * start python interpreter
+   * from game import Game
+   * import loader
+   * g = loader.load()
+   * help(g)
 				
 				
 				
