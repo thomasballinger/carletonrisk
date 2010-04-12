@@ -42,7 +42,7 @@ mapName.png
 <end-mapFile>
 
 Coordinates are in pixels
-Note this mispelled "cordinates" until the parse gets updated
+Note this mispelled "cordinates" until the level parser gets updated
 
 <start-cordinates>
 Usa 200 200
