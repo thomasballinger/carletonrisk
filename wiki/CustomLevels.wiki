@@ -19,7 +19,6 @@ The format used is a plain-text and human readable.  Unlayerable tags like <star
   * each line begins with a list of countries, then has the number of extra units awarded per turn for holding every country in that list 
 
 =Example File=
-Long list sections have been shortened a lot
 
 {{{
 You can put comments here about the file
@@ -40,6 +39,9 @@ Cuba Mexico Usa
 <start-mapFile>
 mapName.png
 <end-mapFile>
+
+Coordinates are in pixels
+Note this mispelled "cordinates" until the parse gets updated
 <start-cordinates>
 Usa 200 200
 Canada 200 100
