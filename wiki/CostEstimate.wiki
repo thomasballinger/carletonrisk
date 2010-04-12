@@ -4,6 +4,8 @@
 
 There is a lot of optimizing that could be done to keep us from running up against quotas.  The two quotas which are issues are outgoing bandwidth and cpu time.  The could be dealt with by more efficient play pages and processing which doesn't involve pickling giant game structures, respectively.  But for the now, we can estimate the capacity of our app within and beyond the quotas.
 
+For constant refreshers: maybe build a webpage and store it, then serve up that stored webpage for F5 addicts.  Essentially a read-only mode for opening a game.
+
 = Quota Estimate =
 
 Very simply, it looks like a game being pretty actively played and refreshed will take about 3% each of 6.50 CPU hours and 1.00 GBytes outgoing bandwidth.  That's ~.2 CPU hours and .03 GB outgoing bandwidth.  This means we can have about 30 games going (depending entirely on traffic; more less active games would be fine).
@@ -17,11 +19,11 @@ After the previously mentioned quotas, billing works like this: [http://code.goo
 || Stored Data || gigabytes per month || $0.15 ||
 || Recipients Emailed || recipients || $0.0001 ||
 
-$.12 x .03 x 30 days = .1 cents per additional game per month
-$.10 x .2  x 30 days = .6 cents per additional game per month
-$.007 per additional game per month
+$.12 x .03 x 30 days = 10 cents per additional game per month
+$.10 x .2  x 30 days = 60 cents per additional game per month
+$.70 per additional game per month
 
-At that rate, each additional game should take about .01 cents per month.  To make another very approximate estimage, I'll say that each user, playing one games worth, takes about this same .01 cent per month.  So the question is: can we make .01 cent per month per frequent user?
+At that rate, each additional, active, simultaneous game should take about $1 per month.  To make another very approximate estimate, I'll say that each user, playing one games worth, takes about this same $1 per month.  So the question is: can we make $1 per month per frequent user?  The answer is almost certainly no.
 
 This site isn't really good for advertising, because the reason people some to the site is to play risk, not get information about something or find a product - that should lead to excruciatingly low CTR (click through rate).  Content websites that come up with Google searches are a better target audience.
 
@@ -30,4 +32,4 @@ I'm having trouble finding estimates of google adwords revenue per users; here a
 1500 page views/day and makes an average of $0.11/day. 
 10K page views a day, about four bucks a day,
 
-So that's like 1 pageview for .005 cents - a user playing games is maybe 100 pageview, so .5 cents, so 15 cents a month?  Really?  That's assuming people click the silly things.  So basically we're in the ballpark of sustainability.
+So that's like 1 pageview for .005 cents - a user playing games is maybe 100 pageview, so .5 cents, so 15 cents a month?  That seems pretty generous, but doesn't nearly cover costs.
