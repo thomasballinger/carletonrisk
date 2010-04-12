@@ -5,8 +5,11 @@ Immediate todo:
  # Win Condition
  # method for inviting non-developer players
  # Cards!
+ # static about page
  # method for uploading and checking custom games
+ # static page about risk rules
  # make html template page for playing risk
+ # read-only mode for game object
  # make maps datastore objects instead of static files
  # make map images datastore blob objects
 
