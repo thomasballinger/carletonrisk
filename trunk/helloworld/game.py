@@ -138,36 +138,50 @@ class Game:
     
     def attack(self,fromCountry,toCountry,howMany,player):
         if self.whosTurn != player:
+            #raise Exception, 'player error'
             return False
         if self.turnStage != 'attacks':
+            #raise Exception, 'its not in the attack stage'
             return False
         if type(fromCountry)!=type('string') and type(fromCountry) != type(u'string'):
-            print 'fromCountry',fromCountry
+            #raise Exception, 'from country is not a string'
             return False
         if type(toCountry)!=type('string') and type(fromCountry) != type(u'string'):
+            #raise Exception, 'to country is not a string'
             return False
         if type(player)!=type('string') and type(player) != type(u'string'):
+            #raise Exception, 'player is not a string'
             return False
         if type(howMany)!=type(1):
+            #raise Exception, 'how many is not a number'
             return False
         if not fromCountry in self.getCountries():
+            #raise Exception, 'from country is not a country'
             return False
         if not toCountry in self.getCountries():
+            #raise Exception, 'to country is not a country'
             return False
         if not player in self.getPlayers():
+            #raise Exception, 'player is not in this game'
             return False
         if not self.isTouching(fromCountry, toCountry):
+            #raise Exception, 'those countries do not touch'
             return False
         if not self.isOwned(fromCountry, player):
+            #raise Exception, 'attacker does not own from country'
             return False
         if self.isOwned(toCountry, player):
+            #raise Exception, 'attacker owns destination country'
             return False
         if self.getTroops(fromCountry) < howMany+1:
+            #raise Exception, 'not enough troops in fromCountry'
             return False
         if howMany < 1:
+            #raise Exception, 'attacking with less than one troop'
             return False
         output = self.rules.attack(fromCountry,toCountry,howMany)
         if not output:
+            #raise Exception, 'rules.attack failed'
             return False
         else:
             self.lastAttack = output
