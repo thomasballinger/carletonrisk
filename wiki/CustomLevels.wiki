@@ -36,12 +36,14 @@ Canada Usa
 Mexico Cuba Usa
 Cuba Mexico Usa
 <end-nodeNetwork>
+
 <start-mapFile>
 mapName.png
 <end-mapFile>
 
 Coordinates are in pixels
 Note this mispelled "cordinates" until the parse gets updated
+
 <start-cordinates>
 Usa 200 200
 Canada 200 100
