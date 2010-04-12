@@ -22,34 +22,34 @@ The format used is a plain-text and human readable.  Unlayerable tags like <star
 Long list sections have been shortened a lot
 
 {{{
+You can put comments here about the file
+fortifies is the number of fortifying moves
+
 <start-settings>
-countriesPerTroop 5
+countriesPerTroop 3
 initialTroopsInCountries 3
 fortifies 3
 <end-settings>
+
 <start-nodeNetwork>
-0 137 138 139 140 1
-1 0 2
-2 1 3 7
-3 4 2 7
-4 5 3 6
+USA Canada Mexico Cuba
+Canada USA
+Mexico Cuba USA
+Cuba Mexico USA
 <end-nodeNetwork>
 <start-mapFile>
-/projects/schiz/ra/tomb/risk/toConvert.png
+mapName.png
 <end-mapFile>
 <start-cordinates>
-0 700 514
-1 669 488
-2 595 487
-3 556 464
-4 535 438
+USA 200 200
+Canada 200 100
+Mexico 200 300
+Cuba 300 300 
 <end-cordinates>
 
 <start-bonuses>
-0 140 139 141 138 137 3
-114 115 117 116 120 118 119 4
-30 31 29 28 22 24 16 15 23 14 25 26 6
-97 98 99 100 101 103 102 104 106 105 5
-68 69 70 71 72 73 74 75 76 4
-<end-bouses>
+USA Canada 3
+Mexico Cuba 2
+Cuba 10
+USA Mexico Canada 3
 }}}
