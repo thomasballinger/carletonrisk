@@ -1,8 +1,8 @@
 #summary Instructions for creating custom levels
 
-= Introduction =
+= Making Custom Levels =
 
-Super-customizable!  Until a decent web interface exists however, you'll have to email your maps to the project leads who will integrate them.  What we need from you is:
+The goal of this project is to super-customizable, without having to pay for membership.  Until a decent web interface exists you'll have to email your maps to the project leads who will integrate them.  What we need from you is:
  * Map file in some form (a picture)
  * Level file, as described in following section
 
