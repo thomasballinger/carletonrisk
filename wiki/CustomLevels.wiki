@@ -3,7 +3,7 @@
 = Introduction =
 
 Super-customizable!  Until a decent web interface exists however, you'll have to email your maps to the project leads who will integrate them.  What we need from you is:
- * Map file in some form
+ * Map file in some form (a picture)
  * Level file, as described in following section
 
 = Level File Spec =
