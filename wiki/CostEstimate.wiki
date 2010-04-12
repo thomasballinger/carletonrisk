@@ -17,8 +17,8 @@ After the previously mentioned quotas, billing works like this: [http://code.goo
 || Stored Data || gigabytes per month || $0.15 ||
 || Recipients Emailed || recipients || $0.0001 ||
 
-$.12 * .03 * 30 days = .1 cents per additional game per month
-$.10 * .2  * 30 days = .6 cents per additional game per month
+$.12 x .03 x 30 days = .1 cents per additional game per month
+$.10 x .2  x 30 days = .6 cents per additional game per month
 $.007 per additional game per month
 
 At that rate, each additional game should take about .01 cents per month.  To make another very approximate estimage, I'll say that each user, playing one games worth, takes about this same .01 cent per month.  So the question is: can we make .01 cent per month per frequent user?
