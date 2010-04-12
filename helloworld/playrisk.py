@@ -249,8 +249,15 @@ class Attack(webapp.RequestHandler):
             loader.save(game)
             self.redirect('/games/'+name)
         else:
+            return
             self.response.out.write("<html><body>")
             self.response.out.write('Problem processing order')
+            self.response.out.write('<br>game problem description:<br>')
+            self.response.out.write('troops in from country: '+str(game.getTroops(fromCountry)))
+            self.response.out.write('troops in to country: '+str(game.getTroops(toCountry)))
+            self.response.out.write('attacking with: '+howMany)
+            self.response.out.write('hm...')
+            self.response.out.write('fill out an error report?')
             self.response.out.write('</body></html>')
                         
 class Freemove(webapp.RequestHandler):
