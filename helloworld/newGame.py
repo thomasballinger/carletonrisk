@@ -11,22 +11,15 @@ class MainPage(webapp.RequestHandler):
         self.response.out.write("""
           <html>
             <body>""")
-        longstrings = db.GqlQuery("SELECT * FROM LongString ORDER BY date")
         user = users.get_current_user()
         if user:
             self.response.out.write('Hello, ' + user.nickname() + '<br>')
         else:
             self.redirect(users.create_login_url(self.request.uri))
-        for longstring in longstrings:
-            if longstring.name:
-                self.response.out.write('<a href="/games/'+longstring.name+'">'+longstring.name+'</a>')
-                self.response.out.write('<br>')
-        self.response.out.write("""<br><form action="/sign" method="post">
-                <div><textarea name="content" rows="3" cols="60"></textarea></div>
-                <div><input type="submit" value="Make new game with name above"></div>
-              </form>
-            </body>
+            
+        self.response.out.write("""</body>
           </html>""")
+
 ## for killing entries
 #        for longstring in longstrings:
 #            longstring.delete()
@@ -41,7 +34,7 @@ def cleanString(string):
                 string = string[:index]+r+string[index+1:]
     return string
 
-class Guestbook(webapp.RequestHandler):
+class NewGame(webapp.RequestHandler):
     def post(self):
         text = cleanString(cgi.escape(self.request.get('content')))
         loader = Loader(text)
@@ -60,9 +53,9 @@ class Guestbook(webapp.RequestHandler):
 
         
 application = webapp.WSGIApplication(
-                                     [('/', MainPage),
-                                      ('/sign', Guestbook),
-                                      ('/games', MainPage)],
+                                     [('/newgame', MainPage),
+                                      ('/newgame/(.*)/(.*)', NewGame),
+                                      ],
                                      debug=True)
 
 def main():

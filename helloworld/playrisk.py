@@ -189,7 +189,10 @@ class PlayRisk(webapp.RequestHandler):
         #window.alert(myVar);
         #</script>
         #''')
-        self.response.out.write(str(game.getPlayers()))
+        
+        self.response.out.write('Turn Order: ')
+        for player in game.getPlayers():
+            self.response.out.write(player+', '+playerColorMap[player][6:-10]+'; ')
         #mapString = game.display()
         #mapString = mapString.replace('\n','<br>')
         #self.response.out.write('<tt><pre>')
@@ -249,6 +252,7 @@ class Attack(webapp.RequestHandler):
             loader.save(game)
             self.redirect('/games/'+name)
         else:
+            self.redirect('/games/'+name)
             return
             self.response.out.write("<html><body>")
             self.response.out.write('Problem processing order')
