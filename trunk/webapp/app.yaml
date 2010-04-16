@@ -29,6 +29,12 @@ handlers:
 - url: /pics
   static_dir: pics
 
+- url: /html
+  static_dir: html
+
+- url: /mapPic/.*
+  script: mapPic.py
+
 - url: /
   script: webapprisk.py
 
