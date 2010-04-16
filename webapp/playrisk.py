@@ -114,6 +114,7 @@ class PlayRisk(webapp.RequestHandler):
         
 
         self.response.out.write('\n <div style="position: relative; z-index:100"> <img src=/pics/toConvertOriginal.png>')
+        self.response.out.write('\n map is called '+game.getMapFile())
         self.response.out.write('\n <font color="FFFFFF">')
         playerColorMap = {}
         colors = ['blueCircle','redCircle','orangeCircle','greenCircle','pinkCircle']
