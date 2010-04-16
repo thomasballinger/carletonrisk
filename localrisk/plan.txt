@@ -1,0 +1,55 @@
+risk game by tom ballinger
+
+
+
+2/16/2010
+Took a break for a bit, did some real work.  Today started
+a game with four people using the graphical interface on the
+Eastern Hemisphere map (map4.txt).  Everyone was polluting
+the filesystem with 'temp.gif' files until I fixed guiProg.py
+so they didn't appear.
+Immediate goals: add fog of war, more rule customizations 
+from the map file.  Add isContiguous to the board object.
+
+
+todo as of late 2/2/2010
+Text-based interface exists, available for alex and tom
+to test.
+The new plan is to eventually use FSLview for viewing the
+3d map of the brain.  Modifying .nii files probably, but 
+modifying nrrd format is definetly possible.  Load various
+labelmaps in fsl so transparency can be controlled for each.
+Is the 3D view in FSL fast enough for this?  Shades of primary
+colors can indicate how many troops, so that when moused over
+it is clear who ownes and how many are there.  Command line
+interface still possible, or a tcl window with buttons and 
+sliders for various actions.  "Attack [] from [] with []" sort
+of thing.  Have to update the pulldown menus with map info.
+Button for update view.  Hopefully CLI exists for FSLview 3D?
+On labelmap map have clear, wide connectors between regions.
+
+todo:
+2/2/2010
+need text-based, nice interface for playing the game
+need a startup game, a file with the game working; startup system
+need a display system; the worldmap.txt system IS working
+get pickling and unpickling going if that's the system
+make sourceable aliases file for everyone to use
+
+started 2/1/2010
+
+Want a game which is represented in pickled python structured, and
+command line tools for:
+-viewing the map
+-taking a turn
+ -things like 'attack USA from canada with 3'
+ -but also 'attack USA' and prompt (from canada with 3)?
+- if try 'place', 'attack', or 'move' at the wrong time, denied - but
+   that's a layer out
+-display always allowed
+
+
+class game
+    class rules
+        class board
+    class display

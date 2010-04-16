@@ -1,0 +1,6 @@
+alias risk "python /projects/schiz/ra/tomb/risk/localrisk/guiProg.py"
+alias place "python /projects/schiz/ra/tomb/risk/localrisk/place.py"
+alias map "python /projects/schiz/ra/tomb/risk/localrisk/show.py"
+alias attack "python /projects/schiz/ra/tomb/risk/localrisk/attack.py"
+alias move "python /projects/schiz/ra/tomb/risk/localrisk/fortify.py"
+alias skip "python /projects/schiz/ra/tomb/risk/localrisk/skip.py"
