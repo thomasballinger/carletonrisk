@@ -152,7 +152,7 @@ fortifies 3
 142 136 137 138 139 140 1
 <end-nodeNetwork>
 <start-mapFile>
-/projects/schiz/ra/tomb/risk/toConvert.png
+toConvert.png
 <end-mapFile>
 <start-cordinates>
 0 700 514
