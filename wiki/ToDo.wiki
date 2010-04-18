@@ -20,6 +20,8 @@
   * Tom - 30 minutes
  # read-only mode for game object
   * Tom - 3 hours
+ # make reinforcement interface more ajax-y
+  * Tom - 3 hours
 
 ==Dan Stuff==
  # Custom map images
@@ -28,7 +30,7 @@
   * Dan - 2 hours
  # static page about risk rules, project
   * Dan - 2 hours
- # make html template page for playing risk
+ # make html template page for playing risk, prettify interface
   * Dan - 3 hours
 = Datastore Objects =
 
