@@ -1,6 +1,7 @@
 #summary Website Structure and To-do List
 
 = To do: =
+==Tom Stuff==
  # make map images datastore blob objects
   * Tom - 1 hour
  # make maps datastore objects instead of static files
