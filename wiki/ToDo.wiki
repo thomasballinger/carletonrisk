@@ -2,64 +2,38 @@
 
 = Introduction =
 Immediate todo:
- # Win Condition
  # method for inviting non-developer players
+ # make map images datastore blob objects
+ # make maps datastore objects instead of static files
  # Cards!
- # static about page
+ # Win Condition
+ # Map editing for custom maps; coordinates and connections
  # method for uploading and checking custom games
  # static page about risk rules
  # make html template page for playing risk
+ # static about page
  # read-only mode for game object
- # make maps datastore objects instead of static files
- # make map images datastore blob objects
 
-= Website Structure =
-Right now I'm imagining the following structure, with functionality described following the url.
+= Datastore Objects =
 
-OUTDATED now - maybe.
+==Game File==
+name
+pickled game
+date started
 
-|| URL || functionality || HTML || code ||
-|| / || welcome page - links to shit || - || none ||	
-|| /games || list of games, probably organized by which you are in, admin can delete games ||rudimentary || - ||
-|| /games/GAMENAME || interface for playing game, interactively view map || - || - ||
-|| || generated javascript function for finding country clicked on || - || - ||
-|| || forms for doing moves || - || basic CLI ||
-|| || form for discussion || - || need to transfer over guiProg to HTML ||
-|| || form for sending nagging emails || - || - ||
-|| || game logic || - || Done ||
-|| || Edit player records || - || - ||
-|| || save modified game || - || Done ||	
-				
-|| /games/GAMENAME/pic || display game - just api calls for creating image || - || - ||
-|| /newgame || make new game, sanitize game name || - || - ||
-|| || check for existing game name || - || - ||
-|| || choose game map currently just uses default map || - || - ||
-|| || game map review system || - || - ||		
-|| /newmap || -upload map images || - || - ||		
-|| || -upload custom map files || - || - ||		
-|| || -verify map txt files || some written || - ||
-|| /players ||-show ranking / list of players, ability to send emails to them? || - || - ||
-|| /maps || -list maps, allow access to text files || - || - ||
+==Map File==
+stuff
+stuff
+stuff
 
-static files:			
-icons for specifying colors, number to add to colors				
-css for page styling?				
+==Player Profile==
+stuff
+stuff
+stuff
 
-Things to do with Dan
- # get Dan up and running with subversion client
-  * static HTML
-  * HTML templates
-  * game.py game objects
-   * start python interpreter
-   * from game import Game
-   * import loader
-   * g = loader.load()
-   * help(g)
-				
-				
-				
-				
-Data stored in cloud:			
- * Games				
- * Maps				
- * Player records				
+==Map Picture==
+name
+picture as a blob
+
+==Mapmaking Image==
+pickled info? or lists of coordinates and connections, and a map picture blob
