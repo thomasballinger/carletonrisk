@@ -1,19 +1,34 @@
 #summary Website Structure and To-do List
 
-= Introduction =
-Immediate todo:
- # method for inviting non-developer players
+= To do: =
  # make map images datastore blob objects
+  * Tom - 1 hour
  # make maps datastore objects instead of static files
- # Cards!
- # Win Condition
- # Map editing for custom maps; coordinates and connections
+  * Tom - 30 minutes
+ # method for inviting non-developer players
+  * Tom - 1 hour
  # method for uploading and checking custom games
- # static page about risk rules
- # make html template page for playing risk
- # static about page
+  * Tom - 1 hour
+ # Map editing for custom maps; coordinates and connections
+  * Tom - 3 hours
+ # Win Condition
+  * Tom - 1 hour
+ # Cards in game engine
+  * Tom - 30 minutes
+ # Display of cards
+  * Tom - 30 minutes
  # read-only mode for game object
+  * Tom - 3 hours
 
+==Dan Stuff==
+ # Custom map images
+  * Dan - 2 hours
+ # Custom map files using web interface
+  * Dan - 2 hours
+ # static page about risk rules, project
+  * Dan - 2 hours
+ # make html template page for playing risk
+  * Dan - 3 hours
 = Datastore Objects =
 
 ==Game File==
