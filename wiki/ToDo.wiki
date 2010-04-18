@@ -17,23 +17,23 @@ Immediate todo:
 = Datastore Objects =
 
 ==Game File==
-* name
-* pickled game
-* date started
+ * name
+ * pickled game
+ * date started
 
 ==Map File==
-* stuff
-* stuff
-* stuff
+ * stuff
+ * stuff
+ * stuff
 
 ==Player Profile==
-* stuff
-* stuff
-* stuff
+ * stuff
+ * stuff
+ * stuff
 
 ==Map Picture==
-* name
-* picture as a blob
+ * name
+ * picture as a blob
 
 ==Mapmaking Image==
 * pickled info? or lists of coordinates and connections, and a map picture blob
