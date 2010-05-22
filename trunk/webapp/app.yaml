@@ -4,6 +4,9 @@ runtime: python
 api_version: 1
 
 handlers:
+- url: /dan
+  static_dir: dan
+
 - url: /games
   script: viewgames.py
 
