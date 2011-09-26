@@ -6,7 +6,7 @@ The control panel for it is at http://appengine.google.com/dashboard?&app_id=bal
 
 All code uploaded to the Google App Engine server is contained in this source repository.  To pull down the code the first time for local execution, you need to follow the steps below:
 
- * Download python 2.5 (preferably, although 2.6 will work for this project)
+ * Download python 2.5 (preferably, although 2.6 or 2.7 will work for this project)
  * Download Google App Engine SDK
  * Check out the project using SVN
   * any decent linux distro should have SVN, the subversion version control software command line client.  You can also probably find a pretty gui client instead.
